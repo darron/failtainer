@@ -1,6 +1,6 @@
 CONTAINER_NAME ?= darron/failtainer
 
-all: normal fail delay
+all: normal fail delay random
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -13,5 +13,8 @@ fail: ## Build Fail Docker image
 
 delay: ## Build Delay Docker image
 	docker build . -t $(CONTAINER_NAME):delay -f Dockerfile-delay
+
+random: ## Build Delay Docker image
+	docker build . -t $(CONTAINER_NAME):random -f Dockerfile-random
 
 .PHONY: help normal fail delay
